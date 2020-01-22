@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -8,9 +9,9 @@ import javax.swing.JPanel;
  *
  * @author VirusFreeNewt
  */
-public class Grid extends JPanel
+public class Grid<c2> extends JPanel
 {
-    private JButton[][] tiles;
+    private static JButton[][] tiles;
 
     public Grid(int dimensions)
     {
@@ -91,5 +92,29 @@ public class Grid extends JPanel
             }
             checker = !checker;
         }
+    }
+    public void random(Color c1, Color c2)
+    {
+        int randomInt = (int)(Math.random() * 100);
+        for(JButton[] row : tiles)
+        {
+            for(JButton col : row)
+            {
+                col.setBackground((randomInt >= 40) ? c1 : c2);
+                randomInt = (int)(Math.random() * 100);
+            }
+        }
+    }
+    private static boolean[][] evaluateLight(Color c1)
+    {
+        boolean[][] result = new boolean[][];
+        for(JButton[] row : tiles)
+        {
+            for(JButton col : row)
+            {
+
+            }
+        }
+        return result;
     }
 }
