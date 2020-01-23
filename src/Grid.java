@@ -1,7 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -9,12 +8,14 @@ import javax.swing.JPanel;
  *
  * @author VirusFreeNewt
  */
-public class Grid<c2> extends JPanel
+public class Grid extends JPanel
 {
     private static JButton[][] tiles;
 
+    private static int dimensions;
     public Grid(int dimensions)
     {
+        Grid.dimensions = dimensions;
         tiles = new JButton[dimensions][dimensions];
         setLayout(new GridLayout(dimensions, dimensions));
         setPreferredSize(new Dimension(500,500));
@@ -105,16 +106,29 @@ public class Grid<c2> extends JPanel
             }
         }
     }
-    private static boolean[][] evaluateLight(Color c1)
+    private static boolean[][] evaluateColor(Color c1)
     {
-        boolean[][] result = new boolean[][];
-        for(JButton[] row : tiles)
+        boolean[][] colorValues = new boolean[dimensions][dimensions];
+        for(int row = 0; row < tiles.length; ++row)
         {
-            for(JButton col : row)
+            for(int col = 0; col < tiles[row].length; ++col)
             {
-
+                colorValues[row][col] = (tiles[row][col].getBackground() == c1);
             }
         }
-        return result;
+        return colorValues;
+    }
+    public static String getEvaluateColor(Color c1)
+    {
+        StringBuilder colorValues = new StringBuilder("Color Values:");
+        for(boolean[] row : evaluateColor(c1))
+        {
+            colorValues.append("\n");
+            for(boolean value : row)
+            {
+                colorValues.append(value).append(value ? "  " : " "); //append extra space for true to make up for 1 less letter
+            }
+        }
+        return colorValues.toString();
     }
 }

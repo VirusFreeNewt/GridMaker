@@ -13,7 +13,7 @@ public class GridMaker
     public static void main(String[] args)
     {
         Grid buttonGrid = new Grid(20);
-        try
+        if(args.length > 0)
         {
             switch (args[0])
             {
@@ -32,14 +32,18 @@ public class GridMaker
                 case "checkers":
                     buttonGrid.checkers(Color.red, Color.black);
                     break;
+                case "random":
+                    buttonGrid.random(Color.red, Color.black);
+                    System.out.println(Grid.getEvaluateColor(Color.red));
+                    break;
                 default:
-                    buttonGrid.colorAll(Color.red);
+                    buttonGrid.colorAll(Color.black);
                     break;
             }
         }
-        catch(ArrayIndexOutOfBoundsException e)
+        else
         {
-            buttonGrid.random(Color.red, Color.black);
+            buttonGrid.colorAll(Color.red);
         }
         JFrame gridFrame = new JFrame("grid");
         gridFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
